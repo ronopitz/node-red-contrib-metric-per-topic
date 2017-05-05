@@ -1,14 +1,31 @@
 {
-  "name"         : "node-red-contrib-message-counter",
-  "version"      : "1.0.0",
-  "description"  : "Message counting node for node-red",
-  "dependencies": {
+  "name": "node-red-contrib-message-counter",
+  "version": "1.0.0",
+  "description": "Message counting node for node-red",
+  "dependencies": {},
+  "keywords": [
+    "node-red",
+    "message-counter",
+    "pulse counter"
+  ],
+  "node-red": {
+    "nodes": {
+      "message-counter": "message-counter/message-counter.js"
+    }
   },
-  "keywords": [ "node-red", "message-counter", "pulse counter" ],
-  "node-red"     : {
-      "nodes": {
-          "message-counter": "message-counter/message-counter.js"
-      }
-  }
-  
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PKGeorgiev/node-red-contrib-message-counter.git"
+  },
+  "author": "Petar Georgiev <petar@pgeorgiev.com> (http://www.pgeorgiev.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PKGeorgiev/node-red-contrib-message-counter/issues"
+  },
+  "homepage": "https://github.com/PKGeorgiev/node-red-contrib-message-counter#readme"
 }
