@@ -1,16 +1,16 @@
 {
-  "name": "node-red-contrib-message-counter",
-  "version": "1.0.1",
-  "description": "Message counting node for node-red",
+  "name": "node-red-contrib-metric-per-topic",
+  "version": "0.1.0",
+  "description": "Count and calculate the payload metric per topic",
   "dependencies": {},
   "keywords": [
     "node-red",
-    "message-counter",
-    "pulse counter"
+    "metric per topic",
+    "counter per topic"
   ],
   "node-red": {
     "nodes": {
-      "message-counter": "message-counter/message-counter.js"
+      "node-red-contrib-metric-per-topic": "metric-per-topic/metric-per-topic.js"
     }
   },
   "main": "index.js",
@@ -20,12 +20,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PKGeorgiev/node-red-contrib-message-counter.git"
+    "url": "git+https://github.com/ronopitz/node-red-contrib-metric-per-topic.git"
   },
-  "author": "Petar Georgiev <petar@pgeorgiev.com> (http://www.pgeorgiev.com)",
+  "author": "Ron Opitz <ron@ronopitz.de>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/PKGeorgiev/node-red-contrib-message-counter/issues"
+    "url": "https://github.com/ronopitz/node-red-contrib-metric-per-topic/issues"
   },
-  "homepage": "https://github.com/PKGeorgiev/node-red-contrib-message-counter#readme"
+  "homepage": "https://github.com/ronopitz/node-red-contrib-metric-per-topic#readme"
 }

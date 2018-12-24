@@ -1,8 +1,10 @@
-Message Counter Node
+Metric per Topic Node
 
-Counts messages within given interval.
+Count and calculate the payload metric per topic
 
-The node has two outputs. <b>Output 1</b> will generate summary message on every interval. <b>Output 2</b> will repeat incoming (non-control) messages. It can be used to continue your flow. 
+The node has two outputs.
+**Output 1** will generate summary message on every interval.  The payload is an object with the min, max, avg, sum and count per topic.
+**Output 2** will repeat incoming (non-control) messages. It can be used to continue your flow.
 Messages are counted on regular intervals when a measuring message arrives. You can choose between two types of measuring message generators:
 
 INTERNAL: uses built-in generator. You can specify interval and units (seconds / minutes / hours). Intervals can be aligned to the system clock

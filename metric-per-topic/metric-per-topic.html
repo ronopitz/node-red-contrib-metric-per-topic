@@ -1,11 +1,11 @@
 
 <script type="text/javascript">
 
-    RED.nodes.registerType('Message Counter',{
+    RED.nodes.registerType('Metric per Topic',{
         category: 'function',
         color: '#a6bbcf',
         self: this,
-        
+
         defaults: {
             name: { value: "" },
             units: { value: "minutes" },
@@ -15,25 +15,25 @@
         },
         inputs: 1,
         outputs: 2,
-        icon: "message-counter.png",
+        icon: "metric-per-topic.png",
         label: function() {
-            return this.name || "Message Counter";
+            return this.name || "Metric per Topic";
         },
-        
+
         oneditprepare: function() {
           let self = this._def;
           $("#node-input-alignToClock").prop('checked', this.alignToClock);
           console.log(this);
           /*.val(this.rrtype).change(function() {
-            self.rrtypeChanged(self); 
+            self.rrtypeChanged(self);
           });*/
-          
+
         }
-        
+
     });
 </script>
 
-<script type="text/x-red" data-template-name="Message Counter">
+<script type="text/x-red" data-template-name="Metric per Topic">
     <div class="form-row">
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
@@ -64,16 +64,18 @@
     </div>
 </script>
 
-<script type="text/x-red" data-help-name="Message Counter">
-    <p>Message Counter Node</p>
-    <p>Counts messages within given interval.</p>
-    <p>The node has two outputs. <b>Output 1</b> will generate summary message on every interval. <b>Output 2</b> will repeat incoming (non-control) messages. It can be used to continue your flow. </p>
+<script type="text/x-red" data-help-name="Metric per Topic">
+    <p>Metric per Topic Node</p>
+    <p>Count and calculate the payload metric per topic within given interval.</p>
+    <p>The node has two outputs.
+       <b>Output 1</b> will generate summary message on every interval. The payload is an object with the min, max, avg, sum and count per topic.<br>
+       <b>Output 2</b> will repeat incoming (non-control) messages. It can be used to continue your flow. </p>
     <p>Messages are counted on regular intervals when a measuring message arrives. You can choose between two types of measuring message generators:<br />
       <ul>
         <li><b>INTERNAL:</b> uses built-in generator. You can specify interval and units (seconds / minutes / hours). Intervals can be aligned to the system clock</li>
         <li><b>EXTERNAL:</b> in this case you are responsible of generating measuring messages. The topic should be "mc-control" and the payload should be "measure".</li>
       </ul>
-      In case you want information about current message count without resetting the counter, then send message with topic "mc-control" and payload "report". 
+      In case you want information about current message count without resetting the counter, then send message with topic "mc-control" and payload "report".
       To distinguish between measure and report messages you can use msg.isReset property. This can be useful for displaying message count to a graph.
     </p>
 </script>
