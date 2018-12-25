@@ -153,13 +153,15 @@ module.exports = function(RED) {
             if (metric[msg.topic]==undefined) {
               metric[msg.topic] = {};
               metric[msg.topic].count = 0;
-              metric[msg.topic].sum = 0;
             }
             metric[msg.topic].count++;
             if (isNaN(msg.payload)) {
             } else {
               msg.payload = Number(msg.payload);
+              if (metric[msg.topic].sum==undefined) metric[msg.topic].sum = 0;
+              if (metric[msg.topic].numcount==undefined) metric[msg.topic].numcount = 0;
               metric[msg.topic].sum += msg.payload;
+              metric[msg.topic].numcount++;
               metric[msg.topic].avg = metric[msg.topic].sum / metric[msg.topic].count;
               if (metric[msg.topic].min===undefined) metric[msg.topic].min = msg.payload;
               if (metric[msg.topic].max===undefined) metric[msg.topic].max = msg.payload;
