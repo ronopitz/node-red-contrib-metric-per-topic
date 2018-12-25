@@ -8,6 +8,7 @@ module.exports = function(RED) {
         var node = this;
         var ctr = 0;
         var ctrTotal = 0;
+        var metric = {};
 
         node.status({ });
         node.units = config.units;
@@ -23,16 +24,18 @@ module.exports = function(RED) {
           console.log("INFO: " + node.interval + " | " + node.units + " | " + node.alignToClock);
 
           msg = {};
-          msg.payload = ctr;
+          msg.payload = metric;
           msg.interval = parseInt(node.interval);
           msg.units = node.units;
           msg.generator = node.generator;
           msg.alignToClock = node.alignToClock;
           msg.totalMessageCount = ctrTotal;
+          msg.totalMessageInterval = ctr;
           msg.isReset = isReset;
 
           if (isReset) {
             ctr = 0;
+            metric = {};
           };
 
           node.send([msg, null]);
@@ -126,7 +129,7 @@ module.exports = function(RED) {
 
         this.on('input', function(msg) {
 
-          if (msg.topic == "mc-control") {
+          if (msg.topic == "mpt-control") {
             // This is a control message
             switch (msg.payload) {
               case "measure": {
@@ -146,6 +149,23 @@ module.exports = function(RED) {
 
           } else {
             // Count messages
+            if (msg.topic==undefined) msg.topic="";
+            if (metric[msg.topic]==undefined) {
+              metric[msg.topic] = {};
+              metric[msg.topic].count = 0;
+              metric[msg.topic].sum = 0;
+            }
+            metric[msg.topic].count++;
+            if (isNaN(msg.payload)) {
+            } else {
+              msg.payload = Number(msg.payload);
+              metric[msg.topic].sum += msg.payload;
+              metric[msg.topic].avg = metric[msg.topic].sum / metric[msg.topic].count;
+              if (metric[msg.topic].min===undefined) metric[msg.topic].min = msg.payload;
+              if (metric[msg.topic].max===undefined) metric[msg.topic].max = msg.payload;
+              if (metric[msg.topic].min>msg.payload) metric[msg.topic].min = msg.payload;
+              if (metric[msg.topic].max<msg.payload) metric[msg.topic].max = msg.payload;
+            }
             ctr++;
             ctrTotal++;
             showCount();
@@ -162,5 +182,5 @@ module.exports = function(RED) {
         });
     }
 
-    RED.nodes.registerType("metric-per-topic", MetricPerTopic);
+    RED.nodes.registerType("Metric per Topic", MetricPerTopic);
 }
