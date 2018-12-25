@@ -65,17 +65,30 @@
 </script>
 
 <script type="text/x-red" data-help-name="Metric per Topic">
-    <p>Metric per Topic Node</p>
-    <p>Count and calculate the payload metric per topic within given interval.</p>
-    <p>The node has two outputs.
-       <b>Output 1</b> will generate summary message on every interval. The payload is an object with the min, max, avg, sum and count per topic.<br>
-       <b>Output 2</b> will repeat incoming (non-control) messages. It can be used to continue your flow. </p>
-    <p>Messages are counted on regular intervals when a measuring message arrives. You can choose between two types of measuring message generators:<br />
-      <ul>
-        <li><b>INTERNAL:</b> uses built-in generator. You can specify interval and units (seconds / minutes / hours). Intervals can be aligned to the system clock</li>
-        <li><b>EXTERNAL:</b> in this case you are responsible of generating measuring messages. The topic should be "mc-control" and the payload should be "measure".</li>
-      </ul>
-      In case you want information about current message count without resetting the counter, then send message with topic "mc-control" and payload "report".
-      To distinguish between measure and report messages you can use msg.isReset property. This can be useful for displaying message count to a graph.
-    </p>
+  <p>Count and calculate the payload metric per topic within given interval.</p>
+  <p><strong>Output</strong></p>
+  <p>The node has two outputs.</p>
+  <ul>
+  <li><em>Output 1</em> will generate summary message on every interval.  The payload is an object with the min, max, avg, sum and count per topic.</li>
+  <li><em>Output 2</em> will repeat incoming (non-control) messages. It can be used to continue your flow.</li>
+  </ul>
+  <p><strong>Intervals</strong></p>
+  <p>Messages are counted on regular intervals when a measuring message arrives. You can choose between two types of measuring message generators:</p>
+  <p>INTERNAL: uses built-in generator. You can specify interval and units (seconds / minutes / hours). Intervals can be aligned to the system clock<br>
+  EXTERNAL: in this case you are responsible of generating measuring messages. The topic should be &quot;mc-control&quot; and the payload should be &quot;measure&quot;.</p>
+  <p><strong>Input</strong></p>
+  <ul>
+  <li>
+  <p><em>Payload</em></p>
+  <p>If the payload is numeric the node calculate the metric per topic. Otherwise the node only count the messages per topic.</p>
+  </li>
+  <li>
+  <p><em>Control the node</em></p>
+  <p>In case you want information about current message count without resetting the counter, then send message with topic &quot;mc-control&quot; and payload &quot;report&quot;. To distinguish between measure and report messages you can use msg.isReset property. This can be useful for displaying message count to a graph.</p>
+  </li>
+  </ul>
+  <p><strong>ToDo</strong></p>
+  <ul>
+  <li> additional number of payloads if the node has received mixed payloads (number/text)</li>
+  </ul>
 </script>
