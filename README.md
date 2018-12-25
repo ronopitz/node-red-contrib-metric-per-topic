@@ -1,6 +1,6 @@
 Metric per Topic Node
 
-Count and calculate the payload metric per topic
+Count and calculate the payload metric per topic within given interval.
 
 The node has two outputs.
 **Output 1** will generate summary message on every interval.  The payload is an object with the min, max, avg, sum and count per topic.
